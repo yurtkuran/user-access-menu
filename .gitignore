@@ -1,0 +1,7 @@
+#ignore node dependencies
+node_modules
+
+#ignore mac hidden files
+**/._*
+**/.DS_Store
+**/._.DS_Store

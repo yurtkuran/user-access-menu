@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/yurtkuran/tutorial-traversy-passport#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
     "mysql2": "^2.0.0",
     "sequelize": "^5.21.2"
   },

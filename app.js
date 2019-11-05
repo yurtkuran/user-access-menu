@@ -1,5 +1,7 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
+const flash   = require('connect-flash');
+const session = require('express-session');
 
 // handlebars helpers library file
 helpers = require('./lib/helpers');
@@ -28,6 +30,23 @@ app.set('view engine', 'handlebars');
 
 // body parser middleware
 app.use(express.urlencoded({ extended: false }));
+
+// express session middleware
+app.use(session({
+    secret: '&%bt42hz',
+    resave: true,
+    saveUninitialized: true
+}));
+
+// connect flash middleware
+app.use(flash());
+
+// global variables
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    next();
+});
 
 // routes
 app.use('/', require('./routes/index'));

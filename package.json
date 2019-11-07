@@ -1,5 +1,5 @@
 {
-  "name": "passport",
+  "name": "passport_authentication",
   "version": "1.0.0",
   "description": "nodejs tutorial using passport",
   "main": "app.js",
@@ -24,6 +24,8 @@
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
     "mysql2": "^2.0.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "sequelize": "^5.21.2"
   },
   "devDependencies": {

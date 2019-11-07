@@ -1,10 +1,14 @@
-const express = require('express');
-const exphbs  = require('express-handlebars');
-const flash   = require('connect-flash');
-const session = require('express-session');
+const express  = require('express');
+const exphbs   = require('express-handlebars');
+const flash    = require('connect-flash');
+const session  = require('express-session');
+const passport = require('passport');
 
 // handlebars helpers library file
 helpers = require('./lib/helpers');
+
+// passport config
+require('./config/passport')(passport);
 
 // database
 const db = require('./config/database');
@@ -38,13 +42,18 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // connect flash middleware
 app.use(flash());
 
 // global variables
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error_msg   = req.flash('error_msg');
+    res.locals.error       = req.flash('error');
     next();
 });
 

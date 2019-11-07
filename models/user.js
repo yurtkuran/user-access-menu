@@ -19,6 +19,11 @@ User.init({
         allowNull: false,
         trim: true
     },
+    isAdmin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
 }, { sequelize: db, modelName: 'user' });
 
 module.exports = User;

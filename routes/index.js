@@ -4,14 +4,17 @@ const router  = express.Router();
 // authentication middleware
 const { ensureAuthenticated } = require('../config/auth');
 
+
+router.get('/', (req,res) => res.render('index', {layout: 'landing'}));
+
+
 // welcome page 
-router.get('/', (req,res) => {
-    res.render('welcome', {
-        // title:     'Damwidi Test',
-        // isEnabled: true
-    });
-    console.log
-});
+// router.get('/', (req,res) => {
+//     res.render('welcome', {
+//         // title:     'Damwidi Test',
+//         // isEnabled: true
+//     });
+// });
 
 // dashboard page 
 router.get('/dashboard', ensureAuthenticated, (req,res) => {

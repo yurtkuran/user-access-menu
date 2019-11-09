@@ -1,7 +1,9 @@
 # tutorial-traversy-passport
-YouTube tutorial using NodeJS and Passport
+Brad Traversy's YouTube tutorial using NodeJS and Passport
 
 https://www.youtube.com/watch?v=6FOq4cUdH8k&t=171s
+Original githup repo: An [example](http://url.com/ "Title")
+https://github.com/bradtraversy/node_passport_login
 
 the original tutorial used MongoDB and EJS. I modified the app to use MySQL and Handlebars instead. Also incorperated:
 + sequlize

@@ -3,6 +3,7 @@ const exphbs   = require('express-handlebars');
 const flash    = require('connect-flash');
 const session  = require('express-session');
 const passport = require('passport');
+const path     = require('path');
 
 // handlebars helpers library file
 helpers = require('./lib/helpers');
@@ -34,6 +35,11 @@ app.set('view engine', 'handlebars');
 
 // body parser middleware
 app.use(express.urlencoded({ extended: false }));
+
+// set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+console.log(__dirname);
+console.log(path.join(__dirname, 'public'));
 
 // express session middleware
 app.use(session({

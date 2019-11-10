@@ -4,7 +4,12 @@ const db         = require('../config/database');
 class User extends Sequelize.Model {};
 
 User.init({
-    name: {
+    firstName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        trim: true
+    },
+    lastName: {
         type: Sequelize.STRING,
         allowNull: false,
         trim: true
@@ -20,6 +25,11 @@ User.init({
         trim: true
     },
     isAdmin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    isMember: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false

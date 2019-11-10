@@ -18,13 +18,16 @@ router.get('/', (req,res) => res.render('index', {layout: 'landing'}));
 
 // dashboard page 
 router.get('/dashboard', ensureAuthenticated, (req,res) => {
-    console.log(req.user.isAdmin);
-    console.log(req.isAuthenticated());
+    console.log("isAdmin:         "+req.user.isAdmin);
+    console.log("isMember:        "+req.user.isMember);
+    console.log("isAuthenticated: "+req.isAuthenticated());
+
     res.render('dashboard', {
-        name:      req.user.name,
-        isEnabled: req.user.isAdmin
+        name:            req.user.name,
+        isAdmin:         req.user.isAdmin,
+        isMember:        req.user.isMember,
+        isAuthenticated: req.isAuthenticated(),
     });
-    
 });
 
 module.exports = router;

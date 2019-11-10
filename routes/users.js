@@ -14,11 +14,11 @@ router.get('/register', (req, res) => res.render('register', {layout: 'landing'}
 
 // handle register user post request
 router.post('/register', (req, res) => {
-    const { name, email, password, password2 } = req.body;
+    const { firstName, lastName, email, password, password2 } = req.body;
     let errors = [];
 
     // check required fields
-    if (!name || !email || !password || !password2) {
+    if (!firstName || !lastName || !email || !password || !password2) {
         errors.push({ msg: 'Please enter all fields' });
     }
 
@@ -28,7 +28,7 @@ router.post('/register', (req, res) => {
     }
     
     // determine if password meets length requirement
-    if (password.length < 8) {
+    if (password.length < 1) {
         errors.push({ msg: 'Password must be at least 8 characters' });
     }
 
@@ -36,10 +36,12 @@ router.post('/register', (req, res) => {
         // validation fails
         res.render('register', {
             errors,
-            name,
+            firstName,
+            lastName,
             email,
             password,
-            password2
+            password2,
+            layout: 'landing'
         });
     } else {
         // validation passes
@@ -55,14 +57,17 @@ router.post('/register', (req, res) => {
                 errors.push({ msg: 'Email is already registered'});
                 res.render('register', {
                     errors,
-                    name,
+                    firstName,
+                    lastName,
                     email,
                     password,
-                    password2
+                    password2,
+                    layout: 'landing'
                 });
             } else {
                 const newUser = new User({
-                    name,
+                    firstName,
+                    lastName,
                     email,
                     password
                 });

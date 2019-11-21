@@ -5,6 +5,9 @@ const session  = require('express-session');
 const passport = require('passport');
 const path     = require('path');
 
+// configure dotenv
+require('dotenv').config();
+
 // handlebars helpers library file
 helpers = require('./lib/helpers');
 
@@ -26,7 +29,7 @@ const app = express();
 var hbs = exphbs.create({
     helpers:       helpers,
     defaultLayout: 'main',
-    partialsDir   : 'views/partials/'
+    partialsDir:   'views/partials/'
 });  
 
 // handlebars middleware
@@ -38,8 +41,6 @@ app.use(express.urlencoded({ extended: false }));
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(__dirname);
-console.log(path.join(__dirname, 'public'));
 
 // express session middleware
 app.use(session({

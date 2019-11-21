@@ -1,7 +1,7 @@
 const Sequelize  = require('sequelize');
 
-module.exports = new Sequelize('tutorial_passport', 'root', '1candy', {
-    host:    'localhost',
+module.exports = new Sequelize('tutorial_passport', process.env.DB_USER, process.env.DB_PASS, {
+    host:    process.env.DB_HOST,
     dialect: 'mysql',
     pool: {
         max: 5,

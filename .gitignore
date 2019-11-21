@@ -5,3 +5,6 @@ node_modules
 **/._*
 **/.DS_Store
 **/._.DS_Store
+
+#ignore environment file
+.env

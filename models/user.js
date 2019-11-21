@@ -34,6 +34,11 @@ User.init({
         allowNull: false,
         defaultValue: false
     },
+    isVerified: {
+        type: Sequelize.BOOLEAN, 
+        allowNull: false, 
+        defaultValue: false
+    }
 }, { sequelize: db, modelName: 'user' });
 
 module.exports = User;

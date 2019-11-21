@@ -56,6 +56,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/users/listusers">List Users</a>
                             <a class="dropdown-item" href="#">S&P 500 Companies</a>
                             <a class="dropdown-item" href="#">Basket Data</a>
                             <a class="dropdown-item" href="#">Performance</a>
@@ -69,7 +70,7 @@
 
                 {{#if isAuthenticated}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/users/logout">Logout</a>
+                        <a class="nav-link" href="/users/logout">Logout: {{name}}</a>
                     </li>
                 {{/if}}
             </ul>

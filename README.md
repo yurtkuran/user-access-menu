@@ -15,4 +15,3 @@ the original tutorial used MongoDB and EJS. I modified the app to use MySQL and 
 + confirmation email using nodemailer
 
 
-**this is a test**

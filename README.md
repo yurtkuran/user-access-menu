@@ -13,5 +13,6 @@ the original tutorial used MongoDB and EJS. I modified the app to use MySQL and 
 + dotenv
 + logs when user logs in or out
 + confirmation email using nodemailer
-
-**yet another test**
++ user CRUD
++ access levels: member & admin
++ momentjs for time formatting 

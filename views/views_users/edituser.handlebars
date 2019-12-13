@@ -1,0 +1,56 @@
+<div class="col-md-8 m-auto pt-3">
+    <div class="card card-body border-secondary card-shadow">
+        <form action="/users/modifyuser" method="POST">
+
+            <input type="hidden" id="hiddenid" name="id" value={{user.id}}>
+            <input type="hidden" id="hiddencreatedAt" name="createdAt" value="{{user.createdAt}}">
+            <input type="hidden" id="hiddenupdatedAt" name="updatedAt" value="{{user.updatedAt}}">
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="inputFirstname">First Name</label>
+                    <input type="text" id="inputFirstname" name="firstName" class="form-control" placeholder="Enter First Name" value="{{user.firstName}}" />
+                    <h6 class="small text-danger">{{user.firstNameError}}</h6>
+                </div>
+                <div class="col-sm-6">
+                    <label for="inputLastname">Last Name</label>
+                    <input type="text" id="inputLastname" name="lastName" class="form-control" placeholder="Enter Last Name" value="{{user.lastName}}" />
+                    <h6 class="small text-danger">{{user.lastNameError}}</h6>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="inputEmail">Email</label>
+                    <input type="text" id="inputEmail" name="email" class="form-control" placeholder="Enter Email" value="{{user.email}}" />
+                    <h6 class="small text-danger">{{user.emailError}}</h6>
+                </div>
+            </div>
+
+            <div class="row justify-content-center border-top border-bottom m-0 py-3">
+                <div class="col-sm-2 form-check form-check-inline">
+                    <input class="form-check-input" name="isVerified" type="checkbox" {{iif user.isVerified user.isVerified 'checked' ''}} id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">Verified</label>
+                </div>
+
+                <div class="col-sm-2 form-check form-check-inline">
+                    <input class="form-check-input" name="isMember" type="checkbox" {{iif user.isMember user.isMember 'checked' ''}} id="defaultCheck2">
+                    <label class="form-check-label" for="defaultCheck2">Member</label>
+                </div>
+                <div class="col-sm-1 form-check form-check-inline">
+                    <input class="form-check-input" name="isAdmin" type="checkbox" {{iif user.isAdmin user.isAdmin 'checked' ''}} id="defaultCheck3">
+                    <label class="form-check-label" for="defaultCheck3">Admin</label>
+                </div>
+            </div>
+            <div class="row justify-content-center border-bottom m-0 py-3">
+                <div class="col-sm-2 text-muted">ID: {{user.id}}</div>
+                <div class="col-sm-3 text-muted">created: {{createdAt}} </div>
+                <div class="col-sm-4 text-muted">last update: {{updatedAt}} </div>
+            </div>
+            <div class="row justify-content-end">
+                <a class="col-sm-2 btn btn-secondary btn-block m-3 rounded" href="/users/listusers"><i class="fa fa-list-alt"></i> View All</a>
+                <button type="submit" class="col-sm-2 btn btn-primary btn-block m-3 rounded"><i class="fa fa-database"></i> Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

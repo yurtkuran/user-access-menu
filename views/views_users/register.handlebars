@@ -27,7 +27,8 @@
                                 name        = "firstName" 
                                 class       = "form-control" 
                                 placeholder = "Enter First Name"
-                                value       = "{{iif name "typeof field != 'undefined'" name ''}}" />
+                                value       = "{{iif register.firstName "typeof field != 'undefined'" register.firstName ''}}" />
+                            <h6 class="small text-danger">{{register.firstNameError}}</h6>
                         </div>
                         <div class="col-sm-6">
                             <label for="inputLastname">Last Name</label>
@@ -36,7 +37,8 @@
                                 name        = "lastName" 
                                 class       = "form-control" 
                                 placeholder = "Enter Last Name"
-                                value       = "{{iif name "typeof field != 'undefined'" name ''}}" />
+                                value       = "{{iif register.lastName "typeof field != 'undefined'" register.lastName ''}}" />
+                            <h6 class="small text-danger">{{register.lastNameError}}</h6>
                         </div>
                     </div>
 
@@ -49,7 +51,8 @@
                                 name        = "email" 
                                 class       = "form-control" 
                                 placeholder = "Enter Email"
-                                value       = "{{iif email "typeof field != 'undefined'" email ''}}" />
+                                value       = "{{iif register.email "typeof field != 'undefined'" register.email ''}}" />
+                            <h6 class="small text-danger">{{register.emailError}}</h6>
                         </div>
                     </div>
 
@@ -62,7 +65,8 @@
                                 name        = "password" 
                                 class       = "form-control"
                                 placeholder = "Create Password" 
-                                value       = "{{iif password "typeof field != 'undefined'" password ''}}" />
+                                value       = "{{iif register.password "typeof field != 'undefined'" register.password ''}}" />
+                            <h6 class="small text-danger">{{register.passwordError}}</h6>
                         </div>
                     </div>
 
@@ -75,14 +79,14 @@
                                 name        = "password2" 
                                 class       = "form-control"
                                 placeholder = "Confirm Password" 
-                                value       = "{{iif password "typeof field != 'undefined'" password ''}}" />
+                                value       = "{{iif register.password2 "typeof field != 'undefined'" register.password2 ''}}" />
+                            <h6 class="small text-danger">{{register.password2Error}}</h6>
                         </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">
                         Register
                     </button>
-
 
                 </form>
             </div>

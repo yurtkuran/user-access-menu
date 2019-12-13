@@ -21,8 +21,8 @@
                     <td class="text-center"><i class="{{iif isMember   "field" 'fas fa-check' 'fas fa-times'}}" ></i></td>
                     <td class="text-center"><i class="{{iif isAdmin    "field" 'fas fa-check' 'fas fa-times'}}" ></i></td>
 
-                    <td class="text-center"><a href="/users/edituser/{{id}}"><i class="far fa-edit"></i></td></a>
-                    <td class="text-center"><i class="far fa-trash-alt"></i></td>
+                    <td class="text-center"><a href="/users/modifyuser/{{id}}"><i class="far fa-edit"></i></td></a>
+                    <td class="text-center"><a href="#" class="delete-user"><i class="far fa-trash-alt" data-id={{id}}></i></a></td>
                 </tr>
             {{/each}}
         </tbody>

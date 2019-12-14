@@ -1,0 +1,97 @@
+<div class="title-wrap">
+    <div class="header">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">DAMWIDI Investments</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="row mt-5 title-wrap">
+        <div class="col-md-6 m-auto">
+            <div class="card card-body border-secondary card-shadow">
+                <h1 class="text-center mb-3"> <i class="fas fa-user-plus"></i> Register </h1>
+
+                {{> messages}}
+
+                <form action="/users/register" method="POST">
+
+                    {{!-- first row --}}
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="inputFirstname">First Name</label>
+                            <input type = "text" 
+                                id          = "inputFirstname" 
+                                name        = "firstName" 
+                                class       = "form-control" 
+                                placeholder = "Enter First Name"
+                                value       = "{{iif register.firstName "typeof field != 'undefined'" register.firstName ''}}" />
+                            <h6 class="small text-danger">{{register.firstNameError}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="inputLastname">Last Name</label>
+                            <input type = "text" 
+                                id          = "inputLastname" 
+                                name        = "lastName" 
+                                class       = "form-control" 
+                                placeholder = "Enter Last Name"
+                                value       = "{{iif register.lastName "typeof field != 'undefined'" register.lastName ''}}" />
+                            <h6 class="small text-danger">{{register.lastNameError}}</h6>
+                        </div>
+                    </div>
+
+                    {{!-- second row --}}
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="inputEmail">Email</label>
+                            <input type        = "email" 
+                                id          = "inputEmail" 
+                                name        = "email" 
+                                class       = "form-control" 
+                                placeholder = "Enter Email"
+                                value       = "{{iif register.email "typeof field != 'undefined'" register.email ''}}" />
+                            <h6 class="small text-danger">{{register.emailError}}</h6>
+                        </div>
+                    </div>
+
+                    {{!-- third row --}}
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="inputPassword">Password</label>
+                            <input type        = "password" 
+                                id          = "inputPassword" 
+                                name        = "password" 
+                                class       = "form-control"
+                                placeholder = "Create Password" 
+                                value       = "{{iif register.password "typeof field != 'undefined'" register.password ''}}" />
+                            <h6 class="small text-danger">{{register.passwordError}}</h6>
+                        </div>
+                    </div>
+
+                    {{!-- forth row --}}
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="inputPassword2">Confirm Password</label>
+                            <input type        = "password" 
+                                id          = "inputPassword2" 
+                                name        = "password2" 
+                                class       = "form-control"
+                                placeholder = "Confirm Password" 
+                                value       = "{{iif register.password2 "typeof field != 'undefined'" register.password2 ''}}" />
+                            <h6 class="small text-danger">{{register.password2Error}}</h6>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Register
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,39 @@
+{
+  "name": "passport_authentication",
+  "version": "1.0.0",
+  "description": "nodejs tutorial using passport",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "clear; nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yurtkuran/tutorial-traversy-passport.git"
+  },
+  "author": "Erol Yurtkuran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yurtkuran/tutorial-traversy-passport/issues"
+  },
+  "homepage": "https://github.com/yurtkuran/tutorial-traversy-passport#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
+    "express-validator": "^6.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "mysql2": "^2.0.0",
+    "nodemailer": "^6.3.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "sequelize": "^5.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}

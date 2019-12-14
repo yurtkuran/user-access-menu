@@ -1,0 +1,56 @@
+{{#if users}}
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th class="text-center">Verified</th>
+                <th class="text-center">Member</th>
+                <th class="text-center">Admin</th>
+                <th class="text-center" colspan="2">Controls</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+                <tr>
+                    <td>{{lastName}}, {{firstName}}</td>
+                    <td>{{email}}</td>
+
+                    <td class="text-center"><i class="{{iif isVerified "field" 'fas fa-check' 'fas fa-times'}}" ></i></td>
+                    <td class="text-center"><i class="{{iif isMember   "field" 'fas fa-check' 'fas fa-times'}}" ></i></td>
+                    <td class="text-center"><i class="{{iif isAdmin    "field" 'fas fa-check' 'fas fa-times'}}" ></i></td>
+
+                    <td class="text-center"><a href="/users/modifyuser/{{id}}"><i class="far fa-edit"></i></td></a>
+                    <td class="text-center"><a href="#" class="delete-user" data-toggle="modal" data-target="#userDeleteModal" data-id={{id}} data-user="{{firstName}} {{lastName}}"><i class="far fa-trash-alt"></i></a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="userDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete <span class="modal-text"></span>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="confirm-delete-button" type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{{else}}
+    <h5>No Users</h5>
+{{/if}}
+
+

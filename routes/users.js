@@ -25,7 +25,7 @@ const newUserValidation = [
     check('firstName').not().isEmpty().withMessage('This is a required field.'),
     check('lastName').not().isEmpty().withMessage('This is a required field.'),
     check('email').isEmail().withMessage('Invalid e-mail address'),
-    check('password').isLength({ min: 1 }).withMessage('Password must be at least 8 characters'),
+    check('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
     check('password2').custom((value, { req }) => {
         if (value !== req.body.password) {
             return Promise.reject('Passwords do not match');

@@ -1,22 +1,28 @@
 $(document).ready(function () {
+    var userID;
 
-    // ajax for deleting employee
-    $('.delete-user').on('click', (e) => {
-        $target = $(e.target);
-        const id = $target.attr('data-id');
+    $('#userDeleteModal').on('show.bs.modal', (e) => {
+        userID = $(e.relatedTarget).data('id');
+        user   = $(e.relatedTarget).data('user');
 
-        if (confirm('Are you sure to delete this record?')) {
-            $.ajax({
-                type: 'DELETE',
-                url: '/users/' + id,
-                success: function (response) {
-                    window.location.href = '/users/listusers';
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        }
-
+        var modal = $(this);
+        modal.find('.modal-text').text(user);
     });
+
+    $('#confirm-delete-button').on('click', () => {
+        $('#myModal').modal('hide');
+
+        // ajax for deleting user
+        $.ajax({    
+            type: 'DELETE',
+            url: '/users/' + userID,
+            success: (response) => {
+                window.location.href = '/users/listusers';
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    });
+
 });

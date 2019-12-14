@@ -6,13 +6,13 @@ https://www.youtube.com/watch?v=6FOq4cUdH8k
 Original githup repo: 
 https://github.com/bradtraversy/node_passport_login
 
-the original tutorial used MongoDB and EJS. I modified the app to use MySQL and Handlebars instead. Also incorperated:
-+ sequlize
+The original tutorial used MongoDB and EJS. I modified the app to use MySQL and Handlebars instead. Also incorperated:
++ sequelize
 + bootstrap navbar with conditional menu items based on user login and admin status
-+ email confirmation wiht JWT
-+ dotenv
-+ logs when user logs in or out
-+ confirmation email using nodemailer
++ email confirmation wiht nodemailer and  JWT
++ dotenv to store configuration infomration (ie passwords, keys, etc)
++ dtabase log when user logs in or out
 + user CRUD
-+ access levels: member & admin
++ multiple access levels: member & admin
 + momentjs for time formatting 
++ bootstrap modal pop-up delete confirmation

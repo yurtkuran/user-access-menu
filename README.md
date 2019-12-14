@@ -16,3 +16,4 @@ The original tutorial used MongoDB and EJS. I modified the app to use MySQL and 
 + multiple access levels: member & admin
 + momentjs for time formatting 
 + bootstrap modal pop-up delete confirmation
++ field validation using express-validator

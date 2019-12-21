@@ -130,8 +130,8 @@ router.post('/register', [newUserValidation] ,(req, res) => {
                         //         html: output,
                         //     });
 
-                            // console.log("Message sent: %s", info.messageId);
-                        });
+                        //     // console.log("Message sent: %s", info.messageId);
+                        // });
 
                         req.flash('success_msg', 'You are now registered, please complete email verification');
                         res.redirect('/users/login');

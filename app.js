@@ -40,7 +40,6 @@ app.use(express.urlencoded({ extended: false }));
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(path.join(__dirname, 'public'));
 
 // express session middleware
 app.use(session({

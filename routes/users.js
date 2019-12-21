@@ -114,21 +114,21 @@ router.post('/register', [newUserValidation] ,(req, res) => {
                 newUser.save( (err, newUser) => {
                     if (!err) {
                         // create JWT token and send email confirmation
-                        jwt.sign({ id: user.id }, process.env.PRIVATEKEY, { expiresIn: '1d', algorithm: 'HS256' }, async (err, token) => {
-                            const url = process.env.BASE_URL + token;
+                        // jwt.sign({ id: user.id }, process.env.PRIVATEKEY, { expiresIn: '1d', algorithm: 'HS256' }, async (err, token) => {
+                        //     const url = process.env.BASE_URL + token;
 
-                            // email text
-                            const output = `
-                             <h2 style="text-align:center;">Welcome to damwidi.com</h2>
-                             <p>Thank you for registering on <b>damwidi.com</b>. Please follow the link below to complete the registration process. This link will expire in 1 day.</p>
-                             <p>Please click here to confirm your email: <a href="${url}">${url}</a></p>`;
+                        //     // email text
+                        //     const output = `
+                        //      <h2 style="text-align:center;">Welcome to damwidi.com</h2>
+                        //      <p>Thank you for registering on <b>damwidi.com</b>. Please follow the link below to complete the registration process. This link will expire in 1 day.</p>
+                        //      <p>Please click here to confirm your email: <a href="${url}">${url}</a></p>`;
 
-                            let info = await transporter.sendMail({
-                                from: 'DAMWIDI Registrtion <test@damwidi.com>',
-                                to: newUser.email,
-                                subject: 'Confirm Email',
-                                html: output,
-                            });
+                        //     let info = await transporter.sendMail({
+                        //         from: 'DAMWIDI Registrtion <test@damwidi.com>',
+                        //         to: newUser.email,
+                        //         subject: 'Confirm Email',
+                        //         html: output,
+                        //     });
 
                             // console.log("Message sent: %s", info.messageId);
                         });

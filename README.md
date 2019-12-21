@@ -1,5 +1,5 @@
 ### user-access-menu
-user access menu system using passport and mongoDB, based on Brad Traversy's YouTube tutorial using NodeJS and Passport
+user access menu system using passport and mongoDB (via mLab), based on Brad Traversy's YouTube tutorial using NodeJS and Passport
 
 Link to YouTube tutorial: https://www.youtube.com/watch?v=6FOq4cUdH8k
 

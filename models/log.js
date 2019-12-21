@@ -1,29 +1,14 @@
-const Sequelize  = require('sequelize');
-const db         = require('../config/database');
+const mongoose = require('mongoose');
 
-class Log extends Sequelize.Model {};
-
-Log.init({
-    _id: {
-        type: Sequelize.INTEGER,
-        trim: true,
-        primaryKey: true
-    },
+// Create Schema
+const logSchema = new mongoose.Schema({
     _user: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        trim: true
+        type: mongoose.Schema.Types.ObjectId,
     },
     type: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        trim: true
+        type: String,
     },
-}, { 
-    sequelize:  db, 
-    modelName:  'log',
-    timestamps: true,
-    updatedAt:  false
-});
+},
+{timestamps: true});
 
-module.exports = Log;
+module.exports = Log = mongoose.model('Log', logSchema);

@@ -4,6 +4,7 @@ const flash    = require('connect-flash');
 const session  = require('express-session');
 const passport = require('passport');
 const path     = require('path');
+const mongoose = require('mongoose');
 
 // configure dotenv
 require('dotenv').config();
@@ -14,13 +15,11 @@ helpers = require('./lib/helpers');
 // passport config
 require('./config/passport')(passport);
 
-// database
-const db = require('./config/database');
-
-// test DB
-db.authenticate()
-    .then(() => console.log('Database connected...'))
-    .catch(err => console.log('Error: '+err));
+// connect to mongo database
+mongoose
+    .connect(process.env.DB_MONGOURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+    .then(() => console.log('Database Connected'))
+    .catch(err => console.log('Error in DB connection : ' + err));
 
 // initialize app
 const app = express();
@@ -41,6 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')));
+console.log(path.join(__dirname, 'public'));
 
 // express session middleware
 app.use(session({

@@ -2,13 +2,13 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt        = require('bcryptjs');
 
 // user model
-const User = require('../models/user');
+const User = require('../models/User.model');
 
 module.exports = function(passport) {
     passport.use(
         new LocalStrategy({ usernameField: 'email'}, (email, password, done) => {
             // match user
-            User.findOne({ where: { email } })
+            User.findOne({ email })
                 .then((user) => { 
 
                     // user does not exist in database
@@ -41,7 +41,7 @@ module.exports = function(passport) {
     });
 
     passport.deserializeUser((id, done) => {
-        User.findByPk(id)
+        User.findById(id)
             .then(user => done(null, user))
             .catch(err => console.log(err));
     });

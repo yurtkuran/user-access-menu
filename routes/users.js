@@ -6,7 +6,7 @@ const jwt      = require('jsonwebtoken');
 const moment   = require('moment');
 
 // user model
-const User = require('../models/user');
+const User = require('../models/User.model');
 
 // log model
 const Log = require('../models/log');
@@ -25,7 +25,7 @@ const newUserValidation = [
     check('firstName').not().isEmpty().withMessage('This is a required field.'),
     check('lastName').not().isEmpty().withMessage('This is a required field.'),
     check('email').isEmail().withMessage('Invalid e-mail address'),
-    check('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
+    check('password').isLength({ min: 1 }).withMessage('Password must be at least 8 characters'),
     check('password2').custom((value, { req }) => {
         if (value !== req.body.password) {
             return Promise.reject('Passwords do not match');
@@ -35,7 +35,7 @@ const newUserValidation = [
     }),
     check('email').custom((email, { req }) => {
         // check if email exists in database
-        return User.findOne({ where : {email} }).then(newuser => {
+        return User.findOne({ email }).then(newuser => {
             if (newuser) {
                 // email exists
                 return Promise.reject('E-mail already in use');
@@ -51,7 +51,7 @@ const existingUserValidation = [
     check('email').isEmail().withMessage('Invalid e-mail address'),
     check('email').custom((email, { req }) => {
         // check if email exists in database
-        return User.findOne({ where : {email} }).then(user => {
+        return User.findOne({ email }).then(user => {
             if (user) {                                                         // email exists
                 if (user.id != req.body.id) {                                   // check if different or same user
                     return Promise.reject('E-mail already in use');
@@ -111,9 +111,8 @@ router.post('/register', [newUserValidation] ,(req, res) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
                 if (err) throw err;
                 newUser.password = hash;
-                newUser.save()
-                    .then(user => {
-
+                newUser.save( (err, newUser) => {
+                    if (!err) {
                         // create JWT token and send email confirmation
                         jwt.sign({ id: user.id }, process.env.PRIVATEKEY, { expiresIn: '1d', algorithm: 'HS256' }, async (err, token) => {
                             const url = process.env.BASE_URL + token;
@@ -136,9 +135,12 @@ router.post('/register', [newUserValidation] ,(req, res) => {
 
                         req.flash('success_msg', 'You are now registered, please complete email verification');
                         res.redirect('/users/login');
-                    })
-                    .catch(err => console.log(err));
-            }));
+                    } else {
+                        console.log('Error during new user save: ' + err);
+                    }
+                });
+            })
+        );
     }
 });
 
@@ -152,8 +154,8 @@ router.get('/logout', (req, res) => {
 
 // modify user
 router.get('/modifyuser/:id', ensureAuthenticated, ensureAccess("admin"), (req,res) => {
-    User.findOne({ where: { id: req.params.id } })
-        .then((user) => {
+    User.findById(req.params.id, (err, user) => {
+        if (!err) {
             res.render('./views_users/edituser', {
                 user,
                 createdAt:       moment(user.createdAt).format('YYYY-MM-DD'),
@@ -163,8 +165,10 @@ router.get('/modifyuser/:id', ensureAuthenticated, ensureAccess("admin"), (req,r
                 isMember:        req.user.isMember,
                 isAuthenticated: req.isAuthenticated(),
             });
-        })
-        .catch(err => console.log(err));
+        } else {
+            console.log('Error during record find: ' + err);
+        }
+    });
 });
 
 // modify user - submit changes
@@ -184,8 +188,8 @@ router.post('/modifyuser', ensureAuthenticated, ensureAccess("admin"), [existing
         handleValidationError(errors, req.body);
         res.render('./views_users/edituser', {
             user:            req.body,
-            createdAt:       moment(req.body.createdAt).format('YYYY-MM-DD'),
-            updatedAt:       moment(req.body.updatedAt).format('YYYY-MM-DD'),
+            createdAt:       moment(req.body.createdAt, 'YYYY-MM-DD').format('YYYY-MM-DD'),
+            updatedAt:       moment(req.body.updatedAt, 'YYYY-MM-DD').format('YYYY-MM-DD'),
             name:            req.user.firstName,
             isAdmin:         req.user.isAdmin,
             isMember:        req.user.isMember,
@@ -200,23 +204,31 @@ router.post('/modifyuser', ensureAuthenticated, ensureAccess("admin"), [existing
         const isVerified = typeof req.body.isVerified == 'undefined' ? 0 : 1;
 
         const {firstName, lastName, email} = req.body;
-        User.update({ firstName, lastName, email, isMember, isAdmin, isVerified }, { where: { id: req.body.id } })
-            .then(res.redirect('/users/listusers'))
-            .catch(err => console.log(err));
+        User.findByIdAndUpdate(req.body.id,{ firstName, lastName, email, isMember, isAdmin, isVerified }, (err, doc) => {
+            if (!err) {
+                res.redirect('/users/listusers');
+            } else {
+                console.log('Error during record update: ' + err);
+            }
+        }); 
     }
 });
 
 // list users
 router.get('/listusers', ensureAuthenticated, ensureAccess("admin"), (req, res) => {
-    User.findAll()
-        .then(users => res.render('./views_users/listusers', {
-            users,
-            name:            req.user.firstName,
-            isAdmin:         req.user.isAdmin,
-            isMember:        req.user.isMember,
-            isAuthenticated: req.isAuthenticated(),
-        }))
-        .catch(err => console.log(err));
+    User.find({}, (err, users) => {
+        if(!err) {
+            res.render('./views_users/listusers', {
+                users,
+                name:            req.user.firstName,
+                isAdmin:         req.user.isAdmin,
+                isMember:        req.user.isMember,
+                isAuthenticated: req.isAuthenticated(),
+            })
+        } else {
+            console.log('Error during users find: ' + err);
+        }
+    });
 });
 
 // delete user
@@ -224,14 +236,14 @@ router.delete('/:id', (req, res) => {
     const id = req.params.id;
     // console.log('ID to be removed: ' + _id);
 
-    User.destroy({ where: { id }})
-        .then(() => {
+    User.findByIdAndDelete(req.params.id, (err, user) => {
+        if (!err) {
             res.sendStatus(200);
-        })
-        .catch(err => {
+        } else {
             console.log('Error in employee delete :' + err);
             res.sendStatus(500);
-        })
+        }
+    });
 });
 
 // handle email confirmation link
@@ -250,12 +262,14 @@ router.get('/confirmation/:token', (req, res) => {
                     break;
             } 
         } else {
-            User.update({ isVerified: true }, { where: {id: authData.id} })
-                .then(() => {
+            User.findByIdAndUpdate((authData.id), { "isVerified": true }, (err, user) => {
+                if(!err) {
                     req.flash('success_msg', 'Thank you for verifing your email. Please login.');
                     res.redirect('/users/login');
-                })
-                .catch(err => console.log(err));
+                } else {
+                    console.log('Error during email confirmation: ' + err);
+                }
+            });
         }
     });
 });
@@ -273,12 +287,11 @@ const writeLogUpdate = ((user, type)=> {
         type
     });
 
-    newLog.save()
-        .then( () => {
-            // console.log('log updated');
-        })
-        .catch(err => console.log(err));
-
+    newLog.save( (err, log) => {
+        if (err) {
+            console.log('Error during log save: ' + err);
+        }
+    });
     return;
 });
 

@@ -17,9 +17,22 @@ $(document).ready(function () {
             type: 'DELETE',
             url: '/users/' + userID,
             success: (response) => {
-                window.location.href = '/users/listusers';
+                if (response == 'sameUser') {
+                    $(location).attr('href', '/users/listusers#');
+                    $("#listMessage").html("\
+                        <div class='alert alert-danger alert-dismissible fade show' role='alert'>\
+                            Deleting current user not allowed\
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>\
+                                <span aria-hidden='true'>&times;</span>\
+                            </button>\
+                        </div>\
+                    ");
+                } else {
+                    $(location).attr('href', '/users/listusers');
+                }
             },
             error: (err) => {
+                console.log('an error occured');
                 console.log(err);
             }
         });

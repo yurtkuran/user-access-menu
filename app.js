@@ -18,7 +18,7 @@ require('./config/passport')(passport);
 // connect to mongo database
 mongoose
     .connect(process.env.DB_MONGOURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-    .then(() => console.log('Database Connected'))
+    .then(() => console.log('Database Connected\n'))
     .catch(err => console.log('Error in DB connection : ' + err));
 
 // initialize app

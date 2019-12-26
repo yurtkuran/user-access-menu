@@ -15,7 +15,7 @@
     {{!-- {{> navbar}} --}}
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="#">DAMWIDI Investments</a>
+        <a class="navbar-brand" href="#">User Access Menu</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,29 +23,32 @@
             <ul class="navbar-nav mr-auto">
                 {{#if isMember}}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Intraday</a>
+                        <a class="nav-link" href="#">Member Item One</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sector Allocation</a>
+                        <a class="nav-link" href="#">Member Item Two</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Trade History</a>
+                        <a class="nav-link" href="#">Member Item Three</a>
                     </li>
                 {{/if}}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Earnings Today</a>
+                    <a class="nav-link" href="#">All Users One</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">All Users Two</a>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown">Charts</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown">Drop Down Items</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown03">
                         {{#if isMember}}
-                            <a class="dropdown-item" href="#">Sector-Timeframe</a>
+                            <a class="dropdown-item" href="#">Member Item Four</a>
                         {{/if}}
-                        <a class="dropdown-item" href="#">Above-Below</a>
-                        <a class="dropdown-item" href="#">Technical</a>
-                        {{#if isEnabled}}
-                            <a class="dropdown-item" href="#">You are an admin</a>
+                        <a class="dropdown-item" href="#">All Users Three</a>
+                        <a class="dropdown-item" href="#">All Users Four</a>
+                        {{#if isAdmin}}
+                            <a class="dropdown-item" href="#">Admin One</a>
                         {{/if}}
                     </div>
                 </li>                
@@ -57,13 +60,10 @@
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/users/listusers">List Users</a>
-                            <a class="dropdown-item" href="#">S&P 500 Companies</a>
-                            <a class="dropdown-item" href="#">Basket Data</a>
-                            <a class="dropdown-item" href="#">Performance</a>
-                            <a class="dropdown-item" href="#">Unstick Log</a>
-                            {{#if isEnabled}}
-                                <a class="dropdown-item" href="#">You are an admin</a>
-                            {{/if}}
+                            <a class="dropdown-item" href="#">Admin Two</a>
+                            <a class="dropdown-item" href="#">Admin Three</a>
+                            <a class="dropdown-item" href="#">Admin Four</a>
+                            <a class="dropdown-item" href="#">Admin Five</a>
                         </div>
                     </li>
                 {{/if}}

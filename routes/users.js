@@ -204,13 +204,14 @@ router.post('/modifyuser', ensureAuthenticated, ensureAccess("admin"), [existing
         const isVerified = typeof req.body.isVerified == 'undefined' ? 0 : 1;
 
         const {firstName, lastName, email} = req.body;
-        User.findByIdAndUpdate(req.body.id,{ firstName, lastName, email, isMember, isAdmin, isVerified }, (err, doc) => {
-            if (!err) {
-                res.redirect('/users/listusers');
-            } else {
-                console.log('Error during record update: ' + err);
-            }
-        }); 
+        // User.findByIdAndUpdate(req.body.id,{ firstName, lastName, email, isMember, isAdmin, isVerified }, (err, doc) => {
+        //     if (!err) {
+        //         res.redirect('/users/listusers');
+        //     } else {
+        //         console.log('Error during record update: ' + err);
+        //     }
+        // });
+        res.redirect('/users/listusers');
     }
 });
 
@@ -236,11 +237,11 @@ router.delete('/:id', (req, res) => {
     // console.log('ID to be removed: ' + req.params.id);
 
     // prevent user from deleting themself 
-    if ( req.params.id == req.user.id || req.params.id == '5df57b783a2beb294a3a8784' ) {
-        res.send('sameUser');
-    } else {
-        res.sendStatus(200);
-    }
+    // if ( req.params.id == req.user.id || req.params.id == '5df57b783a2beb294a3a8784' ) {
+    //     res.send('sameUser');
+    // } else {
+    //     res.sendStatus(200);
+    // }
 
     // User.findByIdAndDelete(req.params.id, (err, user) => {
     //     if (!err) {

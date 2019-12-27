@@ -237,20 +237,18 @@ router.delete('/:id', (req, res) => {
     // console.log('ID to be removed: ' + req.params.id);
 
     // prevent user from deleting themself 
-    // if ( req.params.id == req.user.id || req.params.id == '5df57b783a2beb294a3a8784' ) {
-    //     res.send('sameUser');
-    // } else {
-    //     res.sendStatus(200);
-    // }
-
-    // User.findByIdAndDelete(req.params.id, (err, user) => {
-    //     if (!err) {
-    //         res.sendStatus(200);
-    //     } else {
-    //         console.log('Error in employee delete :' + err);
-    //         res.sendStatus(500);
-    //     }
-    // });
+    if ( req.params.id == req.user.id) {
+        res.send('sameUser');
+    } else {
+        // User.findByIdAndDelete(req.params.id, (err, user) => {
+        //     if (!err) {
+        //         res.sendStatus(200);
+        //     } else {
+        //         console.log('Error in employee delete :' + err);
+        //         res.sendStatus(500);
+        //     }
+        // });
+    }
 });
 
 // handle email confirmation link

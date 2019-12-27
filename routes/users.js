@@ -25,7 +25,7 @@ const newUserValidation = [
     check('firstName').not().isEmpty().withMessage('This is a required field.'),
     check('lastName').not().isEmpty().withMessage('This is a required field.'),
     check('email').isEmail().withMessage('Invalid e-mail address'),
-    check('password').isLength({ min: 1 }).withMessage('Password must be at least 8 characters'),
+    check('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
     check('password2').custom((value, { req }) => {
         if (value !== req.body.password) {
             return Promise.reject('Passwords do not match');
@@ -236,20 +236,19 @@ router.delete('/:id', (req, res) => {
     // console.log('ID to be removed: ' + req.params.id);
 
     // prevent user from deleting themself 
-    if ( req.params.id == req.user.id || req.params.id == '5df57b783a2beb294a3a8784' ) {
+    if ( req.params.id == req.user.id ) {
         res.send('sameUser');
     } else {
-        res.sendStatus(200);
+        User.findByIdAndDelete(req.params.id, (err, user) => {
+            if (!err) {
+                res.sendStatus(200);
+            } else {
+                console.log('Error in employee delete :' + err);
+                res.sendStatus(500);
+            }
+        });
     }
-
-    // User.findByIdAndDelete(req.params.id, (err, user) => {
-    //     if (!err) {
-    //         res.sendStatus(200);
-    //     } else {
-    //         console.log('Error in employee delete :' + err);
-    //         res.sendStatus(500);
-    //     }
-    // });
+ 
 });
 
 // handle email confirmation link

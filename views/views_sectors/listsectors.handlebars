@@ -1,0 +1,50 @@
+<h3 class="mb-3"><a href="/sectors/" class="small mr-3"><i class="fas fa-plus"></i></a>Sectors</h3>
+{{#if sectors}}
+    <div class="col-md-6 m-auto" id="listMessage">
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Symbol</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th class="text-center" colspan="2">Controls</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each sectors}}
+                <tr>
+                    <td style="width: 20%" class="text-center">{{symbol}}</td>
+                    <td style="width: 35%">{{name}}</td>
+                    <td style="width: 35%">{{description}}</td>
+                    <td style="width: 5%" class="text-center"><a href="/sectors/{{id}}"><i class="far fa-edit"></i></td></a>
+                    <td style="width: 5%" class="text-center"><a href="#" class="delete-sector" data-toggle="modal" data-target="#deleteModal" data-id={{id}} data-text="{{symbol}}: {{name}}"><i class="far fa-trash-alt"></i></a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <h5>No Sectors</h5>
+{{/if}}
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <span class="modal-text"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="confirm-delete-button" type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

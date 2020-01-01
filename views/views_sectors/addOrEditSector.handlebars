@@ -1,0 +1,35 @@
+<div class="container">
+    <h3 class="text-center">{{title}}</h3>
+    <div class="col-md-8 m-auto pt-3">
+        <div class="card card-body border-secondary card-shadow pb-1">
+            <form action="/sectors" method="POST">
+                <input type="hidden" name="id" value="{{sector.id}}">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="inputSectorSymbol" class="mb-0">Stock Symbol</label>
+                        <input type="text" id="inputSectorSymbol" name="symbol" class="form-control" placeholder="Enter Symbol" value="{{sector.symbol}}" />
+                        <h6 class="small text-danger">{{sector.symbolError}}</h6>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="inputSectorName" class="mb-0">Name</label>
+                        <input type="text" id="inputSectorName" name="name" class="form-control" placeholder="Sector Name" value="{{sector.name}}" />
+                        <h6 class="small text-danger">{{sector.nameError}}</h6>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <label for="inputSectorDesc" class="mb-0">Description</label>
+                        <input type="text" id="inputSectorDesc" name="description" class="form-control" placeholder="Sector Description" value="{{sector.description}}" />
+                        <h6 class="small text-danger">{{sector.descriptionError}}</h6>
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <a class="col-sm-2 btn btn-secondary btn-block m-3 rounded" href="/sectors/list"><i class="fa fa-list-alt mr-2"></i> View All</a>
+                    <button type="submit" class="col-sm-2 btn btn-primary btn-block rounded m-3"><i class="fa fa-database mr-2"></i>Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

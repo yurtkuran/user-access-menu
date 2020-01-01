@@ -2,6 +2,7 @@ const express  = require('express');
 const exphbs   = require('express-handlebars');
 const flash    = require('connect-flash');
 const session  = require('express-session');
+const favicon  = require('serve-favicon');
 const passport = require('passport');
 const path     = require('path');
 const mongoose = require('mongoose');
@@ -38,6 +39,9 @@ app.set('view engine', 'handlebars');
 // body parser middleware
 app.use(express.urlencoded({ extended: false }));
 
+// favicon middleware
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -64,8 +68,10 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
+app.use('/',        require('./routes/index'));
+app.use('/users',   require('./routes/users'));
+app.use('/logs',    require('./routes/logs'));
+app.use('/sectors', require('./routes/sectors'));
 
 const PORT = process.env.PORT || 5000;
 

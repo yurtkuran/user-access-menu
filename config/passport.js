@@ -10,6 +10,7 @@ module.exports = function(passport) {
             // match user
             User.findOne({ email })
                 .then((user) => { 
+                    console.log(user);
 
                     // user does not exist in database
                     if(!user) {

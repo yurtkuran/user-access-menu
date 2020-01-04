@@ -1,11 +1,16 @@
-const express  = require('express');
-const exphbs   = require('express-handlebars');
-const flash    = require('connect-flash');
-const session  = require('express-session');
-const favicon  = require('serve-favicon');
-const passport = require('passport');
-const path     = require('path');
-const mongoose = require('mongoose');
+const express   = require('express');
+const exphbs    = require('express-handlebars');
+const flash     = require('connect-flash');
+const session   = require('express-session');
+const favicon   = require('serve-favicon');
+const passport  = require('passport');
+const path      = require('path');
+
+// bring in local modules
+const connectDB = require('./config/db');
+
+// clear console
+console.clear();
 
 // configure dotenv
 require('dotenv').config();
@@ -17,10 +22,7 @@ helpers = require('./lib/helpers');
 require('./config/passport')(passport);
 
 // connect to mongo database
-mongoose
-    .connect(process.env.DB_MONGOURI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-    .then(() => console.log('Database Connected\n'))
-    .catch(err => console.log('Error in DB connection : ' + err));
+connectDB();
 
 // initialize app
 const app = express();
@@ -67,11 +69,21 @@ app.use((req, res, next) => {
     next();
 });
 
+// dev middleware - REMOVE BEFORE DEPLOYING
+app.use((req, res, next) => {
+    req.user = {
+        firstName: 'Bart',
+        isAdmin:   true,
+    }
+    next();
+});
+
 // routes
 app.use('/',        require('./routes/index'));
 app.use('/users',   require('./routes/users'));
 app.use('/logs',    require('./routes/logs'));
 app.use('/sectors', require('./routes/sectors'));
+app.use('/stocks',  require('./routes/stocks'));
 
 const PORT = process.env.PORT || 5000;
 

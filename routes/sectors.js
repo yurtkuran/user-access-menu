@@ -8,7 +8,7 @@ const handleValidationError = require('../lib/validationError');
 const Sector = require('../models/Sector.model');
 
 // authentication middleware
-const { ensureAuthenticated, ensureAccess } = require('../config/auth');
+const { ensureAuthenticated, ensureAccess } = require('../config/auth.dev');
 
 // express validator middleware
 const { check, validationResult } = require('express-validator');
@@ -141,7 +141,7 @@ router.post('/',ensureAuthenticated, ensureAccess("admin"), [sectorValidation], 
 
 // handle delete record
 router.delete('/:id', ensureAuthenticated, ensureAccess("admin"), (req, res) => {
-    console.log('ID to be removed: ' + req.params.id);
+    // console.log('ID to be removed: ' + req.params.id);
 
     Sector.findByIdAndDelete(req.params.id, (err, user) => {
         if (!err) {

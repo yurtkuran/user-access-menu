@@ -1,0 +1,32 @@
+<div class="container">
+    <h3 class="text-center">{{title}}</h3>
+    <div class="col-md-8 m-auto pt-3">
+        <div class="card card-body border-secondary card-shadow pb-1">
+            <form action="/stocks" method="POST">
+                <input type="hidden" name="id"   value="{{stock.id}}">
+                <input type="hidden" name="name" value="{{stock.companyName}}">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="inputSectorETF">Sector Symbol</label>
+                        <select class="form-control" id="inputSectorETF" name="sector">
+                            <option selected>Select ETF</option>
+                            {{#each sectors}}
+                                <option value="{{symbol}}" {{{iffselected symbol ../stock.sector}}}>{{symbol}} </option>
+                            {{/each}}
+                        </select>
+                        <h6 class="small text-danger">{{stock.sectorError}}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="inputStockSymbol">Stock Symbol</label>
+                        <input type="text" id="inputStockSymbol" name="symbol" class="form-control rounded" placeholder="Enter Symbol" value="{{stock.symbol}}" />
+                        <h6 class="small text-danger">{{stock.symbolError}}</h6>
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <a class="col-sm-2 btn btn-secondary btn-block m-3 rounded" href="/stocks/list"><i class="fa fa-list-alt mr-2"></i> View All</a>
+                    <button type="submit" class="col-sm-2 btn btn-primary btn-block rounded m-3"><i class="fa fa-database mr-2"></i>Submit</button>
+                </div>
+            </form> 
+        </div>
+    </div>
+</div>

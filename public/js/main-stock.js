@@ -12,12 +12,12 @@ $(document).ready(function () {
     $('#confirm-delete-button').on('click', () => {
         $('#myModal').modal('hide');
         
-        // ajax for deleting sector
+        // ajax for deleting stock
         $.ajax({    
             type: 'DELETE',
-            url: '/sectors/' + id,
+            url: '/stocks/' + id,
             success: (response) => {
-                $(location).attr('href', '/sectors/list');
+                $(location).attr('href', '/stocks/list');
             },
             error: (err) => {
                 console.log('an error occured');
